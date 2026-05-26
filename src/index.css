@@ -1,1 +1,6 @@
 @import "tailwindcss";
+@layer base {
+    html {
+        font-family: "Inconsolata", sans-serif;
+    }
+}
