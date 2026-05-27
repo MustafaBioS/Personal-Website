@@ -1,6 +1,7 @@
 import { useState ,useEffect } from 'react'
 import './App.css'
-import githubLogo from './assets/github-white-icon.webp'
+import githubLogo from './assets/github.webp'
+import spotifyLogo from './assets/spotify.png'
 
 function App() {
 
@@ -28,9 +29,12 @@ function App() {
             style={animate(0)}
         />
         <h1 className="text-white text-lg text-center sm:text-3xl" style={animate(1)}>Hey, I'm <span className="text-[#9AD0DA]">Mustafa</span>!</h1>
-        <div className="flex flex-row items-center" style={animate(2)}>
-            <a href="https://github.com/MustafaBioS">
+        <div className="flex flex-row items-center gap-6" style={animate(2)}>
+            <a href="https://github.com/MustafaBioS" target="_blank">
                 <img src={githubLogo} alt="Github Logo" className="w-9" />
+            </a>
+            <a href="https://open.spotify.com/user/31iornw33kqeejopjajqutfhv6ea?si=933c9d678194426c" target="_blank">
+                <img src={spotifyLogo} alt="Spotify Logo" className="w-9" />
             </a>
         </div>
       </section>
