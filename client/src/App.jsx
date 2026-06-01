@@ -8,9 +8,14 @@ function App() {
     const [isVisible, setIsVisible] = useState(false)
     const [data, setData] = useState(null)
     const [loading, setLoading] = useState(true);
+    const [dots, setDots] = useState(0);
 
     useEffect(() => {
         requestAnimationFrame(() => setIsVisible(true))
+
+        const dotsInterval = setInterval(() => {
+            setDots(prev => (prev + 1) % 4);
+        }, 500);
 
         const getSong = () => {
             fetch("http://localhost:5000/api/now-playing")
@@ -26,10 +31,15 @@ function App() {
             };
         getSong();
 
-        const interval = setInterval(getSong, 5000);
+        const songInterval = setInterval(getSong, 5000);
 
-        return() => clearInterval(interval);
+        return() => {
+            clearInterval(dotsInterval);
+            clearInterval(songInterval);
+        };
     }, [])
+
+    const loadingText = "Loading" + ".".repeat(dots);
 
     function animate(index) {
         return {
@@ -58,10 +68,14 @@ function App() {
             </a>
         </div>
         <div className="spotifyDisplay">
-            <h1 className="text-white">{loading ? (
-                "Loading..."
+            <h1 className="text-white">
+            {loading ? (
+                loadingText
             ) : data?.isPlaying ? (
-                data?.item?.name
+                <div className="flex flex-col items-center">
+                    <a href={data?.song_uri} target="_blank">{data?.song}</a>
+                    <a href={data?.artist_uri} target="_blank">{data?.artist}</a>
+                </div>
             ) : (
                 "Nothing Is Playing"
             )}

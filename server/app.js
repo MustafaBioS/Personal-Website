@@ -23,12 +23,11 @@ async function refreshToken() {
         },
         body: new URLSearchParams({
             grant_type: "refresh_token",
-            refresh_token: process.env.SPOTIFY_REFRESH_TOKEN,
+            refresh_token: process.env.REFRESH_TOKEN,
         }),
     });
 
     const data = await response.json();
-    console.log(data);
 
     access_token = data.access_token;
     expires_in = Date.now() + data.expires_in * 1000;
@@ -70,24 +69,52 @@ app.get('/callback', async (req, res) => {
 })
 
 app.get("/api/now-playing", async (req, res) => {
-
-    if (!access_token || Date.now() > expires_in) {
-        await refreshToken();
-    }
-
-    const response = await fetch("https://api.spotify.com/v1/me/player", {
-        headers: {
-            Authorization: `Bearer ${access_token}`
+    try {
+        if (!access_token || Date.now() > expires_in) {
+            await refreshToken();
         }
-    });
 
-    const data = await response.json();
-    res.json({
-        isPlaying: data.is_playing,
-        song: data.item?.name || null,
-        artist: data.item?.artist?.map(a = a.name).join(", ") || null,
-    });
-})
+        const response = await fetch("https://api.spotify.com/v1/me/player", {
+            headers: {
+                Authorization: `Bearer ${access_token}`
+            }
+        });
+
+        if (response.status === 204) {
+            return res.json({
+                isPlaying: false,
+                song: null,
+                artist: null,
+            });
+        }
+
+        const data = await response.json();
+
+        if (!data || !data.item) {
+            return res.json({
+                isPlaying: false,
+                song: null,
+                artist: null,
+            });
+        }
+
+        if (req.query.debug === "true") {
+            return res.json(data);
+        } else {
+            return res.json({
+                isPlaying: data.is_playing,
+                song: data.item?.name ?? null,
+                artist: data.item?.artists?.map(a => a.name).join(", ") ?? null,
+                song_uri: data.item?.external_urls?.spotify ?? null,
+                artist_uri: data.item?.artists?.map(a => a.external_urls.spotify) ?? null,
+            });
+        }
+
+    } catch (err) {
+        console.error("Now-playing error:", err);
+        res.status(500).json({ error: "Server crash" });
+    }
+});
 
 const PORT = 5000
 app.listen(PORT, () => {
