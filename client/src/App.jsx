@@ -1,14 +1,34 @@
 import { useState ,useEffect } from 'react'
 import './App.css'
-import githubLogo from './assets/github.webp'
-import spotifyLogo from './assets/spotify.png'
+import githubLogo from '../assets/github.webp'
+import spotifyLogo from '../assets/spotify.png'
 
 function App() {
 
     const [isVisible, setIsVisible] = useState(false)
+    const [data, setData] = useState(null)
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         requestAnimationFrame(() => setIsVisible(true))
+
+        const getSong = () => {
+            fetch("http://localhost:5000/api/now-playing")
+                .then(res => res.json())
+                .then(data => {
+                    setData(data);
+                    setLoading(false);
+                })
+                .catch(err => {
+                    console.log(err);
+                    setLoading(false);
+                })
+            };
+        getSong();
+
+        const interval = setInterval(getSong, 5000);
+
+        return() => clearInterval(interval);
     }, [])
 
     function animate(index) {
@@ -36,6 +56,16 @@ function App() {
             <a href="https://open.spotify.com/user/31iornw33kqeejopjajqutfhv6ea?si=933c9d678194426c" target="_blank">
                 <img src={spotifyLogo} alt="Spotify Logo" className="w-9" />
             </a>
+        </div>
+        <div className="spotifyDisplay">
+            <h1 className="text-white">{loading ? (
+                "Loading..."
+            ) : data?.isPlaying ? (
+                data?.item?.name
+            ) : (
+                "Nothing Is Playing"
+            )}
+            </h1>
         </div>
       </section>
     </>
