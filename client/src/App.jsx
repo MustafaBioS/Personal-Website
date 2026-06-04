@@ -22,6 +22,7 @@ function App() {
                 .then(res => res.json())
                 .then(data => {
                     setData(data);
+                    console.log(data);
                     setLoading(false);
                 })
                 .catch(err => {
@@ -67,13 +68,15 @@ function App() {
                 <img src={spotifyLogo} alt="Spotify Logo" className="w-9" />
             </a>
         </div>
-        <div className="spotifyDisplay">
+        <div className="fixed right-12 ">
             <h1 className="text-white">
             {loading ? (
                 loadingText
             ) : data?.isPlaying ? (
-                <div className="flex flex-col items-center">
+                <div className="flex items-center">
+                    <img src={data?.album_image} alt={data?.song} className="" />
                     <a href={data?.song_uri} target="_blank">{data?.song}</a>
+                    <h1 className="m-2"> - </h1>
                     <a href={data?.artist_uri} target="_blank">{data?.artist}</a>
                 </div>
             ) : (

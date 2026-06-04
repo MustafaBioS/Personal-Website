@@ -107,6 +107,7 @@ app.get("/api/now-playing", async (req, res) => {
                 artist: data.item?.artists?.map(a => a.name).join(", ") ?? null,
                 song_uri: data.item?.external_urls?.spotify ?? null,
                 artist_uri: data.item?.artists?.map(a => a.external_urls.spotify) ?? null,
+                album_image: data.item?.album?.images[1]?.url ?? null,
             });
         }
 
