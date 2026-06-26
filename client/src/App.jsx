@@ -79,37 +79,37 @@ function App() {
                 </div>
                 <h1 className="text-white text-[clamp(1.5rem,2vw,2rem)] text-center pt-6" style={animate(1)}>Hey, I'm <span className="text-[#9AD0DA]">Mustafa</span>!</h1>
                 {/*<p className="text-white text-2xl md:w-[60%] w-[75%] xl:w-[35%] pt-6 text-center" style={animate(2)}>I'm a 16 year old from Giza, Egypt, who has taken an interest in programming from such a young age!</p>*/}
-                <div className="text-white flex flex-col items-center w-full pt-2" style={animate(2)}>
-                            {loading ? (
-                                loadingText
-                            ) : data?.isPlaying ? (
-                                <div className="flex items-center flex-col">
-                                    {/*<h1 className="text-xl mb-2">Currently Playing On <span className="text-green-600">Spotify</span>:</h1>*/}
-                                    {/*<img src={data?.album_image} alt={data?.song} className="h-36 md:h-48 rounded-3xl pb-2 md:pb-4" />*/}
-                                    <div className="flex items-center flex-row text-[clamp(1rem,2vw,1.5rem)] w-full">
-                                        <a href={data?.song_uri} target="_blank" className="transition-all duration-300 ease-in-out hover:opacity-70 truncate max-w-full">{data?.song}</a>
-                                        <h1 className="mx-2"> - </h1>
-                                        <p className="truncate max-w-full">
-                                            {data.artists.map((artist, index) => (
-                                                <span key={artist.id}>
-                                                    <a
-                                                        href={artist.uri}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className="transition-all duration-300 ease-in-out hover:opacity-70"
-                                                    >
-                                                        {artist.name}
-                                                    </a>
-                                                    {index < data.artists.length - 1 && ", "}
-                                                </span>
-                                            ))}
-                                        </p>
-                                    </div>
-                                </div>
-                            ) : (
-                                "Nothing Is Playing"
-                            )}
+                <div className="text-white flex flex-col items-center w-full pt-2 text-[clamp(1rem,2vw,1.35rem)]" style={animate(2)}>
+                    {loading ? (
+                        loadingText
+                    ) : data?.isPlaying ? (
+                        <div className="flex items-center flex-col">
+                            {/*<h1 className="text-xl mb-2">Currently Playing On <span className="text-green-600">Spotify</span>:</h1>*/}
+                            {/*<img src={data?.album_image} alt={data?.song} className="h-36 md:h-48 rounded-3xl pb-2 md:pb-4" />*/}
+                            <div className="flex items-center flex-row w-full">
+                                <a href={data?.song_uri} target="_blank" className="transition-all duration-300 ease-in-out hover:opacity-70 truncate max-w-full">{data?.song}</a>
+                                <h1 className="mx-2"> - </h1>
+                                <p className="truncate max-w-full">
+                                    {data.artists.map((artist, index) => (
+                                        <span key={artist.id}>
+                                            <a
+                                                href={artist.uri}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="transition-all duration-300 ease-in-out hover:opacity-70"
+                                            >
+                                                {artist.name}
+                                            </a>
+                                            {index < data.artists.length - 1 && ", "}
+                                        </span>
+                                    ))}
+                                </p>
+                            </div>
                         </div>
+                    ) : (
+                        "No Songs Are Currently Playing"
+                    )}
+                </div>
                 <div className="flex flex-row items-center gap-6 pt-4" style={animate(3)}>
                     <a href="https://github.com/MustafaBioS" target="_blank">
                         <img src={githubLogo} alt="Github Logo" className="transition-all duration-300 ease-in-out hover:-translate-y-1 hover:opacity-75 w-9" />
