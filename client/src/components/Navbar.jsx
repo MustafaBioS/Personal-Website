@@ -30,7 +30,7 @@ export default function Navbar() {
     }, []);
     return (
         <nav className="fixed flex gap-10 backdrop-blur-lg text-white items-center justify-center w-full h-24 text-2xl z-50">
-            {["home", "projects", "contact", "blog"].map((item, index) => (
+            {["home", "about", "projects", "blog"].map((item, index) => (
                 <button
                     key={item}
                     onClick={() => scroll(index + 1)}
