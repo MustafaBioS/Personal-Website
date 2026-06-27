@@ -5,7 +5,9 @@ import '../App.css';
 import githubLogo from '../../assets/github.webp';
 import spotifyLogo from '../../assets/spotify.png';
 import instaLogo from '../../assets/insta-white.webp';
-import Navbar from "../components/Navbar.jsx";
+import Navbar, { scroll } from "../components/Navbar.jsx";
+import { ArrowDown } from 'lucide-react'
+
 
 export default function Home() {
     const [isVisible, setIsVisible] = useState(false)
@@ -15,7 +17,6 @@ export default function Home() {
     const [imageLoaded, setImageLoaded] = useState(false);
 
     const lenis = useLenis((lenis) => {
-        console.log(lenis)
     });
 
     useEffect(() => {
@@ -121,31 +122,20 @@ export default function Home() {
                             <img src={instaLogo} alt="Instagram Logo" className="transition-all duration-300 ease-in-out hover:-translate-y-1 hover:opacity-75 w-9" />
                         </a>
                     </div>
+                    <ArrowDown
+                        color={"White"}
+                        size={46}
+                        onClick={() => scroll(2)}
+                        className={`hover:opacity-70 cursor-pointer transition-all duration-300 ease-in-out absolute animate-bounce bottom-6
+                            ${window.scrollY >= 5 ? "opacity-0" : "opacity-100"}
+                        `
+                    }/>
                 </section>
 
                 <section id="about" className="section2 flex h-screen items-center pb-24 justify-center flex-col">
-                    <div className="relative">
-                        {!imageLoaded && (
-                            <div className="w-50 h-50 rounded-3xl bg-gray-500 animate-pulse" />
-                        )}
-
-                        <img
-                            src="https://github.com/MustafaBioS.png?size=200"
-                            alt="Profile Picture"
-                            className={`rounded-3xl`}
-                            style={animate(0)}
-                            onLoad={() => setImageLoaded(true)}
-                        />
-                    </div>
-                    <h1 className="text-white text-lg text-center sm:text-3xl pt-6" style={animate(1)}>Hey, I'm <span className="text-[#9AD0DA]">Mustafa</span>!</h1>
-                    <p className="text-white text-2xl md:w-[60%] w-[75%] xl:w-[35%] pt-6 text-center" style={animate(2)}>I'm a 16 year old from Giza, Egypt, who has taken an interest in programming from such a young age!</p>
-                    <div className="flex flex-row items-center gap-6 pt-6" style={animate(3)}>
-                        <a href="https://github.com/MustafaBioS" target="_blank">
-                            <img src={githubLogo} alt="Github Logo" className="w-9" />
-                        </a>
-                        <a href="https://open.spotify.com/user/31iornw33kqeejopjajqutfhv6ea?si=933c9d678194426c" target="_blank">
-                            <img src={spotifyLogo} alt="Spotify Logo" className="w-9" />
-                        </a>
+                    <div className="flex flex-row items-center justify-start w-full pl-[15%]">
+                        <div className="h-7 w-1.5 rounded-full bg-[#9AD0DA]"></div>
+                        <strong className="mx-4 text-white text-3xl">About</strong>
                     </div>
                 </section>
 

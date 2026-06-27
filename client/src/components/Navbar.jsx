@@ -1,15 +1,28 @@
 import { useEffect, useState } from 'react';
+import { Link } from "react-router-dom";
+// import * as Icons from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
-function scroll(index) {
+export function scroll(index) {
     const section = document.querySelector(`.section${index}`)
     section?.scrollIntoView({behavior: "smooth", block: "start"});
 }
 
 export default function Navbar() {
     const [active, setActive] = useState("home");
+    const navItems = [
+        { name: "home" },
+        { name: "about" },
+        { name: "projects" },
+        { name: "blog", to: "/blog" },
+    ];
 
     useEffect(() => {
         const sections = document.querySelectorAll('section');
+        // console.log(Icons);
+
+        // console.log(typeof Icons.ArrowUpRight);
+        // console.log(Icons.ArrowUpRight);
 
         const observer = new IntersectionObserver(
             (entries) => {
@@ -30,11 +43,12 @@ export default function Navbar() {
     }, []);
     return (
         <nav className="fixed flex gap-10 backdrop-blur-lg text-white items-center justify-center w-full h-24 text-2xl z-50">
-            {["home", "about", "projects", "blog"].map((item, index) => (
-                <button
-                    key={item}
-                    onClick={() => scroll(index + 1)}
-                    className={`
+            {navItems.map((item, index) =>
+                item.to ? (
+                    <Link
+                        key={item.name}
+                        to={item.to}
+                        className={`
                         cursor-pointer
                         transition-all
                         hover:after:w-full
@@ -43,12 +57,33 @@ export default function Navbar() {
                         after:h-[3px]
                         after:bg-white
                         after:transition-all
-                        ${active === item ? "after:w-full" : "after:w-0"}
+                        ${active === item.name ? "after:w-full" : "after:w-0"}
+                    `}>
+                        <span className="flex flex-row h-full items-center">
+                            {item.name}
+                            <ArrowUpRight size={20} className="mx-1" />
+                        </span>
+                    </Link>
+                ) : (
+                    <button
+                        key={item.name}
+                        onClick={() => scroll(index + 1)}
+                        className={`
+                        cursor-pointer
+                        transition-all
+                        hover:after:w-full
+                        after:content-['']
+                        after:block
+                        after:h-[3px]
+                        after:bg-white
+                        after:transition-all
+                        ${active === item.name ? "after:w-full" : "after:w-0"}
                     `}
-                >
-                    {item}
-                </button>
-            ))}
+                    >
+                        {item.name}
+                    </button>
+                )
+            )}
         </nav>
     );
 }
