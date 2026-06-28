@@ -61,6 +61,7 @@ export default function Home() {
 
     return (
         <>
+            {/*<div className={`fixed transform ${}`}></div>*/}
             <ReactLenis root />
             <div className="inset-0 bg-[#070707] bg-[linear-gradient(#ffffff10_1px,transparent_1px),linear-gradient(90deg,#ffffff10_2px,transparent_2px)] bg-size-[50px_50px]">
                 <Navbar></Navbar>
@@ -126,42 +127,29 @@ export default function Home() {
                         color={"White"}
                         size={46}
                         onClick={() => scroll(2)}
-                        className={`hover:opacity-70 cursor-pointer transition-all duration-300 ease-in-out absolute animate-bounce bottom-6
-                            ${window.scrollY >= 5 ? "opacity-0" : "opacity-100"}
+                        className={`transition-all duration-300 ease-in-out absolute animate-bounce bottom-6
+                            ${window.scrollY >= 5 ? "opacity-0" : "opacity-100 hover:opacity-70 cursor-pointer"}
                         `
                     }/>
                 </section>
 
                 <section id="about" className="section2 flex h-screen items-center pb-24 justify-center flex-col">
-                    <div className="flex flex-row items-center justify-start w-full pl-[15%]">
-                        <div className="h-7 w-1.5 rounded-full bg-[#9AD0DA]"></div>
-                        <strong className="mx-4 text-white text-3xl">About</strong>
+                    <div className="flex flex-col items-start justify-center w-full pl-[17.5%]">
+                        <div className="flex flex-row items-center">
+                            <div className="h-7 w-1.5 rounded-full bg-[#9AD0DA]"></div>
+                            <strong className="mx-4 text-white text-4xl">About</strong>
+                        </div>
+                        <p className="text-white text-lg mt-4 ml-5">lorem ipsum</p>
                     </div>
                 </section>
 
                 <section id="projects" className="section3 flex h-screen items-center pb-24 justify-center flex-col">
-                    <div className="relative">
-                        {!imageLoaded && (
-                            <div className="w-50 h-50 rounded-3xl bg-gray-500 animate-pulse" />
-                        )}
-
-                        <img
-                            src="https://github.com/MustafaBioS.png?size=200"
-                            alt="Profile Picture"
-                            className={`rounded-3xl`}
-                            style={animate(0)}
-                            onLoad={() => setImageLoaded(true)}
-                        />
-                    </div>
-                    <h1 className="text-white text-lg text-center sm:text-3xl pt-6" style={animate(1)}>Hey, I'm <span className="text-[#9AD0DA]">Mustafa</span>!</h1>
-                    <p className="text-white text-2xl md:w-[60%] w-[75%] xl:w-[35%] pt-6 text-center" style={animate(2)}>I'm a 16 year old from Giza, Egypt, who has taken an interest in programming from such a young age!</p>
-                    <div className="flex flex-row items-center gap-6 pt-6" style={animate(3)}>
-                        <a href="https://github.com/MustafaBioS" target="_blank">
-                            <img src={githubLogo} alt="Github Logo" className="w-9" />
-                        </a>
-                        <a href="https://open.spotify.com/user/31iornw33kqeejopjajqutfhv6ea?si=933c9d678194426c" target="_blank">
-                            <img src={spotifyLogo} alt="Spotify Logo" className="w-9" />
-                        </a>
+                    <div className="flex flex-col items-start justify-center w-full pl-[17.5%]">
+                        <div className="flex flex-row items-center">
+                            <div className="h-7 w-1.5 rounded-full bg-[#9AD0DA]"></div>
+                            <strong className="mx-4 text-white text-4xl">Projects</strong>
+                        </div>
+                        <p className="text-white text-lg mt-4 ml-5">lorem ipsum</p>
                     </div>
                 </section>
 
