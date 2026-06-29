@@ -5,7 +5,7 @@ import { ArrowUpRight } from "lucide-react";
 
 export function scroll(index) {
     const section = document.querySelector(`.section${index}`)
-    section?.scrollIntoView({behavior: "smooth", block: "start"});
+    section?.scrollIntoView({behavior: "smooth", block: "center"});
 }
 
 export default function Navbar() {

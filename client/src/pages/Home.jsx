@@ -6,7 +6,8 @@ import githubLogo from '../../assets/github.webp';
 import spotifyLogo from '../../assets/spotify.png';
 import instaLogo from '../../assets/insta-white.webp';
 import Navbar, { scroll } from "../components/Navbar.jsx";
-import { ArrowDown } from 'lucide-react'
+import { ArrowDown } from 'lucide-react';
+import Card from "../components/Card.jsx";
 
 
 export default function Home() {
@@ -63,14 +64,13 @@ export default function Home() {
         <>
             {/*<div className={`fixed transform ${}`}></div>*/}
             <ReactLenis root />
-            <div className="inset-0 bg-[#070707] bg-[linear-gradient(#ffffff10_1px,transparent_1px),linear-gradient(90deg,#ffffff10_2px,transparent_2px)] bg-size-[50px_50px]">
+            <div className="fixed inset-0 -z-10 bg-[#070707] bg-[linear-gradient(#ffffff10_1px,transparent_1px),linear-gradient(90deg,#ffffff10_2px,transparent_2px)] bg-size-[50px_50px]"></div>
                 <Navbar></Navbar>
-                <section id="home" className="section1 flex h-screen items-center justify-center flex-col">
+                <section id="home" className="section1 flex min-h-screen items-center justify-center py-24 flex-col">
                     <div className="relative">
                         {!imageLoaded && (
                             <div className="w-50 h-50 rounded-3xl bg-gray-500 animate-pulse" />
                         )}
-
                         <img
                             src="https://github.com/MustafaBioS.png?size=200"
                             alt="Profile Picture"
@@ -133,8 +133,8 @@ export default function Home() {
                     }/>
                 </section>
 
-                <section id="about" className="section2 flex h-screen items-center pb-24 justify-center flex-col">
-                    <div className="flex flex-col items-start justify-center w-full pl-[17.5%]">
+                <section id="about" className="section2 flex min-h-screen items-center justify-center py-24 flex-col">
+                    <div className="container mx-auto px-6">
                         <div className="flex flex-row items-center">
                             <div className="h-7 w-1.5 rounded-full bg-[#9AD0DA]"></div>
                             <strong className="mx-4 text-white text-4xl">About</strong>
@@ -143,15 +143,24 @@ export default function Home() {
                     </div>
                 </section>
 
-                <section id="projects" className="section3 flex h-screen items-center pb-24 justify-center flex-col">
-                    <div className="flex flex-col items-start justify-center w-full pl-[17.5%]">
-                        <div className="flex flex-row items-center">
+                <section id="projects" className="section3 min-h-screen py-24">
+                    <div className="container mx-auto px-6">
+                        <div className="flex flex-row md:items-center ">
                             <div className="h-7 w-1.5 rounded-full bg-[#9AD0DA]"></div>
                             <strong className="mx-4 text-white text-4xl">Projects</strong>
                         </div>
-                        <p className="text-white text-lg mt-4 ml-5">lorem ipsum</p>
+                        <div className="mt-10 gap-10 grid grid-cols-1 md:grid-cols-3">
+                            <Card title="Test" description="lorem ipsum" image={spotifyLogo} repo="repo" demo="demo" />
+                            <Card title="Test" description="lorem ipsum" image={spotifyLogo} repo="repo" demo="demo" />
+                            <Card title="Test" description="lorem ipsum" image={spotifyLogo} repo="repo" demo="demo" />
+                        </div>
                     </div>
+
                 </section>
+
+                <footer className="items-center flex justify-center">
+                    <h1 className="mb-5 text-white opacity-50">&copy; 2026 Mustafa Hany</h1>
+                </footer>
 
                 {/*<div className="sticky w-full items-center flex bottom-10 justify-center">*/}
                 {/*    <div className="text-white flex flex-col items-center w-full">*/}
@@ -172,8 +181,6 @@ export default function Home() {
                 {/*        )}*/}
                 {/*    </div>*/}
                 {/*</div>*/}
-
-            </div>
         </>
     )
 }
