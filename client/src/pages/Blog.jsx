@@ -1,5 +1,7 @@
 import Navbar from "../components/Navbar.jsx";
 import { Link } from "react-router-dom";
+// import markdown from "react-markdown";
+import fm from "front-matter";
 
 export default function Blog() {
 
@@ -9,9 +11,19 @@ export default function Blog() {
         import: "default",
     });
 
-    const posts = Object.entries(blogs).map(([path]) => ({
-        slug: path.split("/").pop().replace(".md", ""),
-    }));
+    const posts = Object.entries(blogs).map(([path, raw]) => {
+        const { attributes, body } = fm(raw);
+
+        const words = body.trim().split(/\s+/).length;
+        const readTime = Math.max(1, Math.ceil(words / 200));
+
+        return {
+            slug: path.split("/").pop().replace(".md", ""),
+            ...attributes,
+            content: body,
+            readTime,
+        };
+    });
 
     console.log(blogs);
     console.log(posts);
@@ -31,9 +43,12 @@ export default function Blog() {
 
                     <div className="mt-8">
                         {posts.map(post => (
-                            <Link to={`/blog/${post.slug}`} key={post.slug} className="text-white w-full py-5 transition-all ease-in-out duration-300 hover:text-yellow-400 cursor-pointer">
-                                <strong>{post.slug}</strong>
-                            </Link>
+                            <div className="w-full border-b-2 border-white" key={post.slug}>
+                                <Link to={`/blog/${post.slug}`} className="flex flex-row justify-between text-white py-3 px-3 transition-all ease-in-out duration-300 hover:text-yellow-400 cursor-pointer">
+                                    <strong>{post.title}</strong>
+                                    <p>{post.date} · {post.readTime} min read</p>
+                                </Link>
+                            </div>
                         ))}
                     </div>
                 </main>
