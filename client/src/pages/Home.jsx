@@ -2,13 +2,15 @@ import { useState ,useEffect } from 'react';
 import { ReactLenis, useLenis } from 'lenis/react';
 import 'lenis/dist/lenis.css';
 import '../App.css';
-import githubLogo from '../../assets/github.webp';
-import spotifyLogo from '../../assets/spotify.png';
-import instaLogo from '../../assets/insta-white.webp';
+import githubLogo from '../../assets/logos/github.webp';
+import spotifyLogo from '../../assets/logos/spotify.png';
+import instaLogo from '../../assets/logos/insta-white.webp';
 import Navbar, { scroll } from "../components/Navbar.jsx";
 import { ArrowDown } from 'lucide-react';
 import Card from "../components/Card.jsx";
-
+import Paradox from "../../assets/projects/paradox.png";
+import Spotify from "../../assets/projects/spotify.png";
+import Slushies from "../../assets/projects/slushies.png";
 
 export default function Home() {
     const [isVisible, setIsVisible] = useState(false)
@@ -143,16 +145,16 @@ export default function Home() {
                     </div>
                 </section>
 
-                <section id="projects" className="section3 min-h-screen py-24">
+                <section id="projects" className="section3 min-h-[93vh] py-24">
                     <div className="container mx-auto px-6">
                         <div className="flex flex-row md:items-center ">
                             <div className="h-7 w-1.5 rounded-full bg-[#9AD0DA]"></div>
                             <strong className="mx-4 text-white text-4xl">Projects</strong>
                         </div>
-                        <div className="mt-10 gap-10 grid grid-cols-1 md:grid-cols-3">
-                            <Card title="Test" description="lorem ipsum" image={spotifyLogo} repo="repo" demo="demo" />
-                            <Card title="Test" description="lorem ipsum" image={spotifyLogo} repo="repo" demo="demo" />
-                            <Card title="Test" description="lorem ipsum" image={spotifyLogo} repo="repo" demo="demo" />
+                        <div className="mt-10 gap-10 grid grid-cols-1 md:grid-cols-3 items-stretch">
+                            <Card title="Paradox" description="This is a platform i made for my Hack Club YSWS, Paradox, It's built in Ruby on Rails and was actually my first Ruby on Rails project yet it was super fun and taught me alot." image={Paradox} repo="https://github.com/MustafaBioS/paradox" demo="https://paradox.mustafa.hackclub.app/" />
+                            <Card title="Spotify Display" description="Spotify Display hardware project, My first ever hardware project, You put it on your desk and connect it to your WI-FI and Spotify API and it displays your currently playing song on Spotify" image={Spotify} repo="https://github.com/MustafaBioS/Spotify-Display" demo="https://github.com/MustafaBioS/Spotify-Display" />
+                            <Card title="Slushies" description="Slushies is the website for another YSWS i have run for Hack Club, it uses ThreeJS for the 3D effect and i also made the slideshow guide!" image={Slushies} repo="https://github.com/MustafaBioS/slushies" demo="https://slushies.hackclub.com" />
                         </div>
                     </div>
 
