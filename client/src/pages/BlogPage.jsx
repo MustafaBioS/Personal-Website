@@ -51,11 +51,11 @@ export default function BlogPage() {
             <Navbar />
             <div className="fixed inset-0 -z-10 bg-[#070707] bg-[linear-gradient(#ffffff10_1px,transparent_1px),linear-gradient(90deg,#ffffff10_2px,transparent_2px)] bg-size-[50px_50px]"></div>
             <div className="pt-40 mx-auto max-w-xl px-6">
-                <Link to="/blog" className="text-white opacity-70 flex max-w-35 flex-row gap-2 hover:text-[#9AD0DA] transition-all duration-300 ease-in-out"><span><ArrowLeft className="w-5"/></span> Back To Blog</Link>
+                <Link to="/blog" className="text-white opacity-70 flex max-w-35 flex-row gap-2 hover:text-[#9AD0DA] transition-all duration-300 ease-in-out"><span><ArrowLeft className="w-5"/></span> Back To Blogs</Link>
 
-                <h1 key={post.slug} className="mt-6 font-bold text-white text-3xl sm:text-5xl leading-tight">{post.title}</h1>
+                <h1 key={post.slug} className="mt-6 font-bold text-white text-2xl sm:text-4xl leading-tight">{post.title}</h1>
 
-                <h1 key={post.slug} className="mt-1 text-white text-lg opacity-70 mb-16">
+                <h1 key={post.slug} className="mt-1 text-white text-lg opacity-70 mb-10">
                     {new Date(post.date).toLocaleDateString("en-US", {
                         year: "numeric",
                         month: "long",
@@ -64,6 +64,7 @@ export default function BlogPage() {
                     {" · "}
                     {post.readTime} min read
                 </h1>
+                <hr className="bg-white h-0.5 mb-10"/>
                 <div className="text-white prose prose-invert max-w-none">
                     <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
                         {post.content}
