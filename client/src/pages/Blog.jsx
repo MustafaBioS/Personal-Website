@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import fm from "front-matter";
 import 'lenis/dist/lenis.css';
 import { ReactLenis, useLenis } from "lenis/react";
+import { ArrowLeft } from "lucide-react";
 
 export default function Blog() {
 
@@ -30,9 +31,6 @@ export default function Blog() {
         };
     });
 
-    console.log(blogs);
-    console.log(posts);
-
     return (
         <>
             <ReactLenis root/>
@@ -52,7 +50,7 @@ export default function Blog() {
                             <div className="w-full border-b-2 border-white" key={post.slug}>
                                 <Link to={`/blog/${post.slug}`} className="flex flex-row justify-between text-white py-3 px-3 transition-all ease-in-out duration-300 hover:text-[#9AD0DA] cursor-pointer">
                                     <strong>{post.title}</strong>
-                                    <p>
+                                    <p className="hidden sm:block">
                                         {new Date(post.date).toLocaleDateString("en-US", {
                                             year: "numeric",
                                             month: "long",

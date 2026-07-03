@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
@@ -119,6 +120,12 @@ app.get("/api/now-playing", async (req, res) => {
         console.error("Now-playing error:", err);
         res.status(500).json({ error: "Server crash" });
     }
+});
+
+app.use(express.static(path.join(__dirname, "../client/dist")));
+
+app.use((req, res) => {
+    res.sendFile(path.join(__dirname, "../client/dist/index.html"));
 });
 
 const PORT = 5000

@@ -53,7 +53,7 @@ export default function BlogPage() {
             <div className="pt-40 mx-auto max-w-xl px-6">
                 <Link to="/blog" className="text-white opacity-70 flex max-w-35 flex-row gap-2 hover:text-[#9AD0DA] transition-all duration-300 ease-in-out"><span><ArrowLeft className="w-5"/></span> Back To Blog</Link>
 
-                <h1 key={post.slug} className="mt-6 font-bold text-white text-5xl">{post.title}</h1>
+                <h1 key={post.slug} className="mt-6 font-bold text-white text-3xl sm:text-5xl leading-tight">{post.title}</h1>
 
                 <h1 key={post.slug} className="mt-1 text-white text-lg opacity-70 mb-16">
                     {new Date(post.date).toLocaleDateString("en-US", {
