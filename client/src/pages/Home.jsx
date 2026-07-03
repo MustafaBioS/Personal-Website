@@ -11,6 +11,7 @@ import Card from "../components/Card.jsx";
 import Paradox from "../../assets/projects/paradox.png";
 import Spotify from "../../assets/projects/spotify.png";
 import Slushies from "../../assets/projects/slushies.png";
+import { useLocation } from "react-router-dom";
 
 export default function Home() {
     const [isVisible, setIsVisible] = useState(false)
@@ -21,6 +22,21 @@ export default function Home() {
 
     const lenis = useLenis((lenis) => {
     });
+
+    const location = useLocation();
+
+    useEffect(() => {
+        if (location.state?.scrollTo) {
+            const section = document.getElementById(location.state.scrollTo);
+
+            section?.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+            });
+
+            window.history.replaceState({}, document.title);
+        }
+    }, [location])
 
     useEffect(() => {
         requestAnimationFrame(() => setIsVisible(true))

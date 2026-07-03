@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 @layer base {
     html {
         font-family: "Inconsolata", sans-serif;

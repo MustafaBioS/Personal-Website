@@ -2,8 +2,13 @@ import Navbar from "../components/Navbar.jsx";
 import { Link } from "react-router-dom";
 // import markdown from "react-markdown";
 import fm from "front-matter";
+import 'lenis/dist/lenis.css';
+import { ReactLenis, useLenis } from "lenis/react";
 
 export default function Blog() {
+
+    const lenis = useLenis((lenis) => {
+    });
 
     const blogs = import.meta.glob("../blogs/*.md", {
         eager: true,
@@ -30,12 +35,13 @@ export default function Blog() {
 
     return (
         <>
+            <ReactLenis root/>
             <div className="fixed inset-0 -z-10 bg-[#070707] bg-[linear-gradient(#ffffff10_1px,transparent_1px),linear-gradient(90deg,#ffffff10_2px,transparent_2px)] bg-size-[50px_50px]" />
 
-            <div className="flex min-h-screen flex-col">
+            <div id="blog" className="blog flex min-h-screen flex-col">
                 <Navbar />
 
-                <main className="mx-auto w-full max-w-[30vw] flex-1 pt-48">
+                <main className="mx-auto w-full max-w-xl px-6 flex-1 pt-48">
                     <div className="flex flex-row items-center">
                         <div className="h-7 w-1.5 rounded-full bg-[#9AD0DA]" />
                         <strong className="mx-4 text-4xl text-white">Blogs</strong>
@@ -44,9 +50,17 @@ export default function Blog() {
                     <div className="mt-8">
                         {posts.map(post => (
                             <div className="w-full border-b-2 border-white" key={post.slug}>
-                                <Link to={`/blog/${post.slug}`} className="flex flex-row justify-between text-white py-3 px-3 transition-all ease-in-out duration-300 hover:text-yellow-400 cursor-pointer">
+                                <Link to={`/blog/${post.slug}`} className="flex flex-row justify-between text-white py-3 px-3 transition-all ease-in-out duration-300 hover:text-[#9AD0DA] cursor-pointer">
                                     <strong>{post.title}</strong>
-                                    <p>{post.date} · {post.readTime} min read</p>
+                                    <p>
+                                        {new Date(post.date).toLocaleDateString("en-US", {
+                                            year: "numeric",
+                                            month: "long",
+                                            day: "numeric",
+                                        })}
+                                        {" · "}
+                                        {post.readTime} min read
+                                    </p>
                                 </Link>
                             </div>
                         ))}
