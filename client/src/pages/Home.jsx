@@ -1,4 +1,4 @@
-import { useState ,useEffect } from 'react';
+import { useState ,useEffect, useRef } from 'react';
 import { ReactLenis, useLenis } from 'lenis/react';
 import 'lenis/dist/lenis.css';
 import '../App.css';
@@ -97,17 +97,20 @@ export default function Home() {
                         />
                     </div>
                     <h1 className="text-white text-[clamp(1.5rem,2vw,2rem)] text-center pt-6" style={animate(1)}>Hey, I'm <span className="text-[#9AD0DA]">Mustafa</span>!</h1>
-                    {/*<p className="text-white text-2xl md:w-[60%] w-[75%] xl:w-[35%] pt-6 text-center" style={animate(2)}>I'm a 16 year old from Giza, Egypt, who has taken an interest in programming from such a young age!</p>*/}
                     <div className="text-white flex flex-col items-center w-full pt-2 text-[clamp(1rem,2vw,1.35rem)]" style={animate(2)}>
                         {loading ? (
                             loadingText
                         ) : data?.isPlaying ? (
                             <div className="flex items-center flex-col">
-                                {/*<h1 className="text-xl mb-2">Currently Playing On <span className="text-green-600">Spotify</span>:</h1>*/}
-                                {/*<img src={data?.album_image} alt={data?.song} className="h-36 md:h-48 rounded-3xl pb-2 md:pb-4" />*/}
                                 <div className="flex items-center flex-row w-full">
-                                    <a href={data?.song_uri} target="_blank" className="transition-all duration-300 ease-in-out hover:opacity-70 truncate max-w-full">{data?.song}</a>
-                                    <h1 className="mx-2"> - </h1>
+                                    <a
+                                        href={data?.song_uri}
+                                        target="_blank"
+                                        className="transition-all duration-300 ease-in-out hover:opacity-70 truncate max-w-full"
+                                    >
+                                        {data?.song}
+                                    </a>
+                                    <span className="mx-2"> - </span>
                                     <p className="truncate max-w-full">
                                         {data.artists.map((artist, index) => (
                                             <span key={artist.id}>
@@ -145,22 +148,23 @@ export default function Home() {
                         size={46}
                         onClick={() => scroll(2)}
                         className={`transition-all duration-300 ease-in-out absolute animate-bounce bottom-6
-                            ${window.scrollY >= 5 ? "opacity-0" : "opacity-100 hover:opacity-70 cursor-pointer"}
+                            ${window.scrollY >= 5 ? "opacity-0 pointer-events-none" : "opacity-100 hover:opacity-70 cursor-pointer"}
                         `
                     }/>
                 </section>
 
-                <section id="about" className="section2 flex min-h-screen items-center justify-center py-24 flex-col">
+                <section id="about" style={animate(5)} className="section2 flex min-h-screen items-center justify-center py-24 flex-col">
                     <div className="container mx-auto px-6">
                         <div className="flex flex-row items-center">
                             <div className="h-7 w-1.5 rounded-full bg-[#9AD0DA]"></div>
                             <strong className="mx-4 text-white text-4xl">About</strong>
                         </div>
-                        <p className="text-white text-lg mt-4 ml-5">lorem ipsum</p>
+                        <p className="text-white text-lg mt-4 ml-5">Hey, I'm <span className="text-[#9AD0DA]">Mustafa</span>, A 16 year old high school student from Egypt!</p>
+                        <p className="text-white text-lg mt-2 ml-5">And this is the first version of my personal website, hopefully i'll improve it in the future!</p>
                     </div>
                 </section>
 
-                <section id="projects" className="section3 min-h-[93vh] py-24">
+                <section id="projects" style={animate(6)} className="section3 min-h-[93vh] py-24">
                     <div className="container mx-auto px-6">
                         <div className="flex flex-row md:items-center ">
                             <div className="h-7 w-1.5 rounded-full bg-[#9AD0DA]"></div>
@@ -178,26 +182,6 @@ export default function Home() {
                 <footer className="items-center flex justify-center">
                     <h1 className="mb-5 text-white opacity-50">&copy; 2026 Mustafa Hany</h1>
                 </footer>
-
-                {/*<div className="sticky w-full items-center flex bottom-10 justify-center">*/}
-                {/*    <div className="text-white flex flex-col items-center w-full">*/}
-                {/*        {loading ? (*/}
-                {/*            loadingText*/}
-                {/*        ) : data?.isPlaying ? (*/}
-                {/*            <div className="flex items-center flex-col">*/}
-                {/*                /!*<h1 className="text-xl mb-2">Currently Playing On <span className="text-green-600">Spotify</span>:</h1>*!/*/}
-                {/*                <img src={data?.album_image} alt={data?.song} className="h-36 md:h-48 rounded-3xl pb-2 md:pb-4" />*/}
-                {/*                <div className="flex items-center flex-row text-[clamp(1rem,2vw,1.5rem)] m-2 w-full">*/}
-                {/*                    <a href={data?.song_uri} target="_blank" className="truncate max-w-full">{data?.song}</a>*/}
-                {/*                    <h1 className="m-2"> - </h1>*/}
-                {/*                    <a href={data?.artist_uri} target="_blank" className="truncate max-w-full">{data?.artist}</a>*/}
-                {/*                </div>*/}
-                {/*            </div>*/}
-                {/*        ) : (*/}
-                {/*            "Nothing Is Playing"*/}
-                {/*        )}*/}
-                {/*    </div>*/}
-                {/*</div>*/}
         </>
     )
 }

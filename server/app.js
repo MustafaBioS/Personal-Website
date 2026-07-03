@@ -99,22 +99,18 @@ app.get("/api/now-playing", async (req, res) => {
             });
         }
 
-        if (req.query.debug === "true") {
-            return res.json(data);
-        } else {
-            return res.json({
-                isPlaying: data.is_playing,
-                song: data.item?.name ?? null,
-                artists: data.item?.artists?.map(a => ({
-                    name: a.name,
-                    uri: a.external_urls.spotify,
-                    id: a.id,
-                })) ?? [],
-                song_uri: data.item?.external_urls?.spotify ?? null,
-                artist_uri: data.item?.artists?.map(a => a.external_urls.spotify) ?? null,
-                album_image: data.item?.album?.images[1]?.url ?? null,
-            });
-        }
+        return res.json({
+            isPlaying: data.is_playing,
+            song: data.item?.name ?? null,
+            artists: data.item?.artists?.map(a => ({
+                name: a.name,
+                uri: a.external_urls.spotify,
+                id: a.id,
+            })) ?? [],
+            song_uri: data.item?.external_urls?.spotify ?? null,
+            artist_uri: data.item?.artists?.map(a => a.external_urls.spotify) ?? null,
+            album_image: data.item?.album?.images[1]?.url ?? null,
+        });
 
     } catch (err) {
         console.error("Now-playing error:", err);

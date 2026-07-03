@@ -30,15 +30,11 @@ export default function Navbar() {
 
     useEffect(() => {
         const sections = document.querySelectorAll('section');
-        // console.log(Icons);
 
         if (location.pathname.startsWith("/blog")) {
             setActive("blog");
             return;
         }
-
-        // console.log(typeof Icons.ArrowUpRight);
-        // console.log(Icons.ArrowUpRight);
 
         const observer = new IntersectionObserver(
             (entries) => {
