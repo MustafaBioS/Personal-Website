@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "identifier": "com.mustafa.personal",
   "build": {
-    "frontendDist": "../client/dist",
+    "frontendDist": "../  client/dist",
     "devUrl": "http://localhost:5173",
     "beforeDevCommand": "cd client && npm run dev",
     "beforeBuildCommand": "cd client && npm run build"
