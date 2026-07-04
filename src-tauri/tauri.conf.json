@@ -2,9 +2,9 @@
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "Personal Desktop",
   "version": "0.1.0",
-  "identifier": "com.tauri.dev",
+  "identifier": "com.mustafa.personal",
   "build": {
-    "frontendDist": "client/dist",
+    "frontendDist": "../client/dist",
     "devUrl": "http://localhost:5173",
     "beforeDevCommand": "cd client && npm run dev",
     "beforeBuildCommand": "cd client && npm run build"
